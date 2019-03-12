@@ -1,5 +1,9 @@
 // To Do
 // change classes to IDs and add a class to manage like formatting
+// move variables out of global
+// logic for selection menu
+// logic for math problem generation
+// scoring system
 
 
 
@@ -17,7 +21,7 @@ login.onclick = () => {
     playerName = nameInput.value;
     loginScreen.style.display = 'none';
     document.querySelector('#name-display').textContent = `Welcome ${playerName}!`;
-    menuScreen.style.display= 'block';
+    menuScreen.style.display = 'block';
 };
 
 mathSelection.onclick = (e) => {

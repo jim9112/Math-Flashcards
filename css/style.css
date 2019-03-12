@@ -8,6 +8,7 @@
     width: 100%;
     height: 100%;
 }
+
 .card {
     border-radius: 5px;
     box-shadow: 5px 5px 5px rgb(0, 0, 0);
@@ -17,15 +18,19 @@
     margin: auto;
     text-align: center;
 }
+
 .math-container {
     display: inline-block;
 }
+
 .math-container h1 {
     margin: 5px;
 }
+
 #answer {
     display: block;
 }
+
 /* #login-screen {
 } */
 #menu-screen {
