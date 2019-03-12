@@ -9,7 +9,28 @@
     height: 100%;
 }
 
-.modal {
+.login-screen {
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px rgb(0, 0, 0);
+    background-color: white;
+    padding: 20px;
+    width: fit-content;
+    margin: auto;
+    text-align: center;
+}
+.menu-screen {
+    display: none;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px rgb(0, 0, 0);
+    background-color: white;
+    padding: 20px;
+    width: fit-content;
+    margin: auto;
+    text-align: center;
+}
+
+.flash-card {
+    display: none;
     border-radius: 5px;
     box-shadow: 5px 5px 5px rgb(0, 0, 0);
     background-color: white;
