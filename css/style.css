@@ -17,6 +17,15 @@
     margin: auto;
     text-align: center;
 }
+.math-container {
+    display: inline-block;
+}
+.math-container h1 {
+    margin: 5px;
+}
+#answer {
+    display: block;
+}
 /* #login-screen {
 } */
 #menu-screen {

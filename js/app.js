@@ -9,6 +9,7 @@ const login = document.querySelector('.login');
 const loginScreen = document.querySelector('#login-screen');
 const menuScreen = document.querySelector('#menu-screen');
 const mathSelection = document.querySelector('#math-selection');
+const flashCard = document.querySelector('#flash-card');
 
 let playerName = '';
 
@@ -21,5 +22,7 @@ login.onclick = () => {
 
 mathSelection.onclick = (e) => {
     e.preventDefault();
+    menuScreen.style.display = 'none';
+    flashCard.style.display = 'block';
     console.log('math selection test');
 };
