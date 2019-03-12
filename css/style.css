@@ -1,4 +1,4 @@
-.login-screen {
+.main-screen {
     background: url('../media/board-2167844_1920.jpg') no-repeat center fixed;
     background-size: cover;
     position: fixed;
@@ -9,7 +9,7 @@
     height: 100%;
 }
 
-.login-window {
+.modal {
     border-radius: 5px;
     box-shadow: 5px 5px 5px rgb(0, 0, 0);
     background-color: white;
