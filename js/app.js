@@ -41,10 +41,11 @@ const generateProblem = (sign) => {
 const checkAnswer = (sign) => {
     var one = parseInt(problemNumbers[0].textContent);
     var two = parseInt(problemNumbers[1].textContent);
+    var realAnswer;
     if (sign === '+') {
-        var realAnswer = one + two;
+        realAnswer = one + two;
     } else if (sign === '-') {
-        var realAnswer = one - two;
+        realAnswer = one - two;
     }
     
     const answerButton = document.querySelector('#answer-button');
