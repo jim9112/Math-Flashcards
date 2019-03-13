@@ -2,20 +2,17 @@
 // move variables out of global
 // logic for selection menu
 // scoring system
+// mixed mode (addition and subtraction together)
 
-
-
-
-const nameInput = document.querySelector('#name-input');
-const login = document.querySelector('.login');
 const loginScreen = document.querySelector('#login-screen');
 const menuScreen = document.querySelector('#menu-screen');
-const mathSelection = document.querySelector('#math-selection');
 const flashCard = document.querySelector('#flash-card');
 const problemNumbers = document.querySelectorAll('.problem-numbers');
 
-let playerName = '';
-
+const player = {
+    playerName: '',
+    score: 0
+};
 
 // generate random numbers (0-10 for now)
 const randomNumberGen = () => Math.floor(Math.random() * 10);
@@ -63,15 +60,14 @@ const checkAnswer = (sign) => {
     };
 };
 // event listener for name input
-login.onclick = () => {
-    playerName = nameInput.value;
+document.querySelector('.login').onclick = () => {
+    player.playerName = document.querySelector('#name-input').value;
     loginScreen.style.display = 'none';
-    document.querySelector('#name-display').textContent = `Welcome ${playerName}!`;
     menuScreen.style.display = 'block';
 };
 
 // event listener for math selection
-mathSelection.onclick = (e) => {
+document.querySelector('#math-selection').onclick = (e) => {
     e.preventDefault();
     menuScreen.style.display = 'none';
     flashCard.style.display = 'block';

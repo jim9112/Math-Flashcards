@@ -11,14 +11,18 @@
 
 <body>
     <div class="main-screen">
+        <div id='menu-bar'>
+            <h1>Welcome</h1>
+            <button>Exit</button>
+        </div>
         <div id="login-screen" class="card">
             <h1>Welcome to Math Cards</h1>
-            What is your name? <input type="text" id="name-input">
-            <br>
-            <button class="login">Enter</button>
+                What is your name? <input type="text" id="name-input">
+                <br>
+                <button type="submit" class="login">Enter</button>
         </div>
         <div id="menu-screen" class="card">
-            <h1 id="name-display"></h1><br>
+            <h2>Please Make A Selection</h2><br>
             <form action="" id="mathSelection">
                 <input type="radio" name="gender" value="addition" id="addition"> Addition<br>
                 <input type="radio" name="gender" value="subtraction" id="subtraction"> Subtraction<br>
