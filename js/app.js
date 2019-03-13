@@ -59,5 +59,5 @@ mathSelection.onclick = (e) => {
     e.preventDefault();
     menuScreen.style.display = 'none';
     flashCard.style.display = 'block';
-    generateProblem();;
+    generateProblem();
 };
