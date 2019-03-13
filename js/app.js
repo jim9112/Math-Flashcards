@@ -1,7 +1,6 @@
 // To Do
 // move variables out of global
 // logic for selection menu
-// logic for math problem generation
 // scoring system
 
 
@@ -33,14 +32,17 @@ const checkAnswer = () => {
     var one = parseInt(problemNumbers[0].textContent);
     var two = parseInt(problemNumbers[1].textContent);
     var realAnswer = one + two;
-    console.log(realAnswer);
     const answerButton = document.querySelector('#answer-button');
     answerButton.onclick = () => {
-        const userAnswer = parseInt(document.querySelector('#answer').value);
+        const userAnswerInput = document.querySelector('#answer')
+        const userAnswer = parseInt(userAnswerInput.value);
         if (realAnswer === userAnswer) {
-            console.log('Correct');
+            alert('Correct');
+            generateProblem();
+            userAnswerInput.value = '';
         } else {
-            console.log('Nope');
+            alert('Try again');
+            userAnswerInput.value = '';
         }
     };
 };
@@ -57,6 +59,5 @@ mathSelection.onclick = (e) => {
     e.preventDefault();
     menuScreen.style.display = 'none';
     flashCard.style.display = 'block';
-    generateProblem();
-    console.log('math selection test');
+    generateProblem();;
 };
