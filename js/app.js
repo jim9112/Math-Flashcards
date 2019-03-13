@@ -21,24 +21,39 @@ let playerName = '';
 const randomNumberGen = () => Math.floor(Math.random() * 10);
 
 // generate math problem
-const generateProblem = () => {
-    problemNumbers[0].textContent = randomNumberGen();
-    problemNumbers[1].textContent = randomNumberGen();
-    checkAnswer();
+const generateProblem = (sign) => {
+    var one = randomNumberGen();
+    var two = randomNumberGen();
+    
+    // larger number on top
+    if (one > two) {
+        problemNumbers[0].textContent = one;
+        problemNumbers[1].textContent = two;
+    } else {
+        problemNumbers[1].textContent = one;
+        problemNumbers[0].textContent = two;
+    }
+    document.querySelector('#sign').textContent = sign;
+    checkAnswer(sign);
 };
 
 // checks the users answer
-const checkAnswer = () => {
+const checkAnswer = (sign) => {
     var one = parseInt(problemNumbers[0].textContent);
     var two = parseInt(problemNumbers[1].textContent);
-    var realAnswer = one + two;
+    if (sign === '+') {
+        var realAnswer = one + two;
+    } else if (sign === '-') {
+        var realAnswer = one - two;
+    }
+    
     const answerButton = document.querySelector('#answer-button');
     answerButton.onclick = () => {
         const userAnswerInput = document.querySelector('#answer');
         const userAnswer = parseInt(userAnswerInput.value);
         if (realAnswer === userAnswer) {
             alert('Correct');
-            generateProblem();
+            generateProblem(sign);
             userAnswerInput.value = '';
         } else {
             alert('Try again');
@@ -59,5 +74,9 @@ mathSelection.onclick = (e) => {
     e.preventDefault();
     menuScreen.style.display = 'none';
     flashCard.style.display = 'block';
-    generateProblem();
+    if (document.querySelector('#addition').checked) {
+        generateProblem('+');
+    } else if (document.querySelector('#subtraction').checked){
+        generateProblem('-');
+    }
 };
