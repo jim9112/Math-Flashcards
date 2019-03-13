@@ -13,6 +13,7 @@ const loginScreen = document.querySelector('#login-screen');
 const menuScreen = document.querySelector('#menu-screen');
 const mathSelection = document.querySelector('#math-selection');
 const flashCard = document.querySelector('#flash-card');
+const problemNumbers = document.querySelectorAll('.problem-numbers');
 
 let playerName = '';
 
@@ -22,11 +23,27 @@ const randomNumberGen = () => Math.floor(Math.random() * 10);
 
 // generate math problem
 const generateProblem = () => {
-    const problemNumbers = document.querySelectorAll('.problem-numbers');
     problemNumbers[0].textContent = randomNumberGen();
     problemNumbers[1].textContent = randomNumberGen();
+    checkAnswer();
 };
 
+// checks the users answer
+const checkAnswer = () => {
+    var one = parseInt(problemNumbers[0].textContent);
+    var two = parseInt(problemNumbers[1].textContent);
+    var realAnswer = one + two;
+    console.log(realAnswer);
+    const answerButton = document.querySelector('#answer-button');
+    answerButton.onclick = () => {
+        const userAnswer = parseInt(document.querySelector('#answer').value);
+        if (realAnswer === userAnswer) {
+            console.log('Correct');
+        } else {
+            console.log('Nope');
+        }
+    };
+};
 // event listener for name input
 login.onclick = () => {
     playerName = nameInput.value;
