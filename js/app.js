@@ -34,7 +34,7 @@ const checkAnswer = () => {
     var realAnswer = one + two;
     const answerButton = document.querySelector('#answer-button');
     answerButton.onclick = () => {
-        const userAnswerInput = document.querySelector('#answer')
+        const userAnswerInput = document.querySelector('#answer');
         const userAnswer = parseInt(userAnswerInput.value);
         if (realAnswer === userAnswer) {
             alert('Correct');
