@@ -8,6 +8,9 @@ const loginScreen = document.querySelector('#login-screen');
 const menuScreen = document.querySelector('#menu-screen');
 const flashCard = document.querySelector('#flash-card');
 const problemNumbers = document.querySelectorAll('.problem-numbers');
+const exitButton = document.querySelector('#exit');
+
+
 
 const player = {
     playerName: '',
@@ -62,6 +65,7 @@ const checkAnswer = (sign) => {
 // event listener for name input
 document.querySelector('.login').onclick = () => {
     player.playerName = document.querySelector('#name-input').value;
+    exitButton.style.display = 'block';
     loginScreen.style.display = 'none';
     menuScreen.style.display = 'block';
 };
@@ -78,10 +82,12 @@ document.querySelector('#math-selection').onclick = (e) => {
     }
 };
 
-document.querySelector('#exit').onclick = () => {
+// exit button
+exitButton.onclick = () => {
     player.playerName = '';
     player.score = 0;
     loginScreen.style.display = 'block';
     menuScreen.style.display = 'none';
     flashCard.style.display = 'none';
+    exitButton.style.display = 'none';
 };
