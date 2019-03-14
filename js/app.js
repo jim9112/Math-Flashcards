@@ -77,3 +77,11 @@ document.querySelector('#math-selection').onclick = (e) => {
         generateProblem('-');
     }
 };
+
+document.querySelector('#exit').onclick = () => {
+    player.playerName = '';
+    player.score = 0;
+    loginScreen.style.display = 'block';
+    menuScreen.style.display = 'none';
+    flashCard.style.display = 'none';
+};
