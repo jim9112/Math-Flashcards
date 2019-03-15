@@ -14,16 +14,32 @@ const exitButton = document.querySelector('#exit');
 
 const player = {
     playerName: '',
-    score: 0
+    score: 0,
+    level: 0,
+    gameMode: '',
 };
 
 // generate random numbers (0-10 for now)
 const randomNumberGen = () => Math.floor(Math.random() * 10);
 
 // generate math problem
-const generateProblem = (sign) => {
-    var one = randomNumberGen();
-    var two = randomNumberGen();
+const generateProblem = () => {
+    let sign = '';
+    if (player.gameMode === 'addition') {
+        sign = '+';
+    } else if (player.gameMode === 'subtraction') {
+        sign = '-';
+    } else if (player.gameMode === 'mixed') {
+        let temp = Math.floor(Math.random() * 2) + 1;
+        if (temp === 1) {
+            sign ='+';
+        } else if (temp === 2){
+            sign = '-';
+        }
+    }
+
+    let one = randomNumberGen();
+    let two = randomNumberGen();
     
     // larger number on top
     if (one > two) {
@@ -54,7 +70,7 @@ const checkAnswer = (sign) => {
         const userAnswer = parseInt(userAnswerInput.value);
         if (realAnswer === userAnswer) {
             alert('Correct');
-            generateProblem(sign);
+            generateProblem();
             userAnswerInput.value = '';
         } else {
             alert('Try again');
@@ -76,9 +92,14 @@ document.querySelector('#math-selection').onclick = (e) => {
     menuScreen.style.display = 'none';
     flashCard.style.display = 'block';
     if (document.querySelector('#addition').checked) {
-        generateProblem('+');
+        player.gameMode = 'addition';
+        generateProblem();
     } else if (document.querySelector('#subtraction').checked){
-        generateProblem('-');
+        player.gameMode = 'subtraction';
+        generateProblem();
+    } else if (document.querySelector('#mixed').checked){
+        player.gameMode = 'mixed';
+        generateProblem();
     }
 };
 
