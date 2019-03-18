@@ -81,9 +81,11 @@ const checkAnswer = (sign) => {
 // event listener for name input
 document.querySelector('.login').onclick = () => {
     player.playerName = document.querySelector('#name-input').value;
+    document.querySelector('#welcome-banner').textContent = `Welcome ${player.playerName}`;
     exitButton.style.display = 'block';
     loginScreen.style.display = 'none';
     menuScreen.style.display = 'block';
+
 };
 
 // event listener for math selection
@@ -107,6 +109,7 @@ document.querySelector('#math-selection').onclick = (e) => {
 exitButton.onclick = () => {
     player.playerName = '';
     player.score = 0;
+    document.querySelector('#name-input').value = '';
     loginScreen.style.display = 'block';
     menuScreen.style.display = 'none';
     flashCard.style.display = 'none';
