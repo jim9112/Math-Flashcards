@@ -3,6 +3,7 @@
 // logic for selection menu
 // scoring system
 // mixed mode (addition and subtraction together)
+// make rame always start with a capitol letter
 
 const loginScreen = document.querySelector('#login-screen');
 const menuScreen = document.querySelector('#menu-screen');
@@ -19,8 +20,18 @@ const player = {
     gameMode: '',
 };
 
+const levels = [
+    [10, 1],
+    [20,10]
+];
+
 // generate random numbers (0-10 for now)
-const randomNumberGen = () => Math.floor(Math.random() * 10);
+const randomNumberGen = () => Math.floor(Math.random() * 11);
+
+
+
+// add a min and a max to the problem generation based on the current level
+
 
 // generate math problem
 const generateProblem = () => {
@@ -64,32 +75,35 @@ const checkAnswer = (sign) => {
         realAnswer = one - two;
     }
     
-    const answerButton = document.querySelector('#answer-button');
-    answerButton.onclick = () => {
+    document.querySelector('#answer-form').onsubmit = (e) => {
+        e.preventDefault();
         const userAnswerInput = document.querySelector('#answer');
         const userAnswer = parseInt(userAnswerInput.value);
         if (realAnswer === userAnswer) {
             alert('Correct');
+            player.score += 1;
             generateProblem();
             userAnswerInput.value = '';
         } else {
             alert('Try again');
+            player.score -= 1;
             userAnswerInput.value = '';
         }
     };
 };
-// event listener for name input
-document.querySelector('.login').onclick = () => {
+
+// sign in menu
+document.querySelector('#name-form').onsubmit = (e) => {
+    e.preventDefault();
     player.playerName = document.querySelector('#name-input').value;
     document.querySelector('#welcome-banner').textContent = `Welcome ${player.playerName}`;
     exitButton.style.display = 'block';
     loginScreen.style.display = 'none';
     menuScreen.style.display = 'block';
-
 };
 
 // event listener for math selection
-document.querySelector('#math-selection').onclick = (e) => {
+document.querySelector('#math-selection').onsubmit = (e) => {
     e.preventDefault();
     menuScreen.style.display = 'none';
     flashCard.style.display = 'block';

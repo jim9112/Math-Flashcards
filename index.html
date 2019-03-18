@@ -17,17 +17,20 @@
         </div>
         <div id="login-screen" class="card">
             <h1>Welcome to Math Cards</h1>
-                What is your name? <input type="text" id="name-input">
-                <br>
-                <button type="submit" class="login">Enter</button>
+                <form action="" id="name-form">
+                    What is your name? <input type="text" id="name-input">
+                    <br>
+                    <button type="submit" class="login">Enter</button>
+                </form>
+                
         </div>
         <div id="menu-screen" class="card">
             <h2>Please Make A Selection</h2><br>
-            <form action="" id="mathSelection">
+            <form action="" id="math-selection">
                 <input type="radio" name="math" value="addition" id="addition" checked="checked"> Addition<br>
                 <input type="radio" name="math" value="subtraction" id="subtraction"> Subtraction<br>
                 <input type="radio" name="math" value="mixed" id="mixed"> Mixed<br>
-                <input type="submit" value="Submit" id="math-selection">
+                <input type="submit" value="Submit">
             </form>
         </div>
         <div id="flash-card" class="card">
@@ -39,8 +42,11 @@
                 <h1 class="problem-numbers"></h1>
             </div>
             <hr>
-            <input type="number" name="answer" id="answer"><br>
-            <button id="answer-button">Check <br> Answer</button>
+            <form action="" id="answer-form">
+                <input type="number" name="answer" id="answer"><br>
+                <button id="answer-button">Check <br> Answer</button>
+            </form>
+            
             <!-- <button id="next-button">Next <br> Problem</button> -->
 
         </div>
