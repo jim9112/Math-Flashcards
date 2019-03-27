@@ -3,15 +3,13 @@
 // logic for selection menu
 // scoring system
 // mixed mode (addition and subtraction together)
-// make rame always start with a capitol letter
+// make name always start with a capitol letter
 
 const loginScreen = document.querySelector('#login-screen');
 const menuScreen = document.querySelector('#menu-screen');
 const flashCard = document.querySelector('#flash-card');
 const problemNumbers = document.querySelectorAll('.problem-numbers');
 const exitButton = document.querySelector('#exit');
-
-
 
 const player = {
     playerName: '',
@@ -20,17 +18,24 @@ const player = {
     gameMode: '',
 };
 
-const levels = [
-    [10, 1],
-    [20,10]
+// possible new levels option
+const testLevels = [
+    [() => Math.floor(Math.random() * 11), () => Math.floor(Math.random() * 10)],
+    [() => Math.floor(Math.random() * 5) + 10,() => Math.floor(Math.random() * 10)],
+    [() => Math.floor(Math.random() * 10) + 10,() => Math.floor(Math.random() * 10)]
 ];
 
-// generate random numbers (0-10 for now)
-const randomNumberGen = () => Math.floor(Math.random() * 11);
-
-
-
 // add a min and a max to the problem generation based on the current level
+
+const checkScore = () => {
+    if (player.score < 10) {
+        player.level = 0;
+    } else if (player.score >= 10 && player.score < 20) {
+        player.level = 1;
+    } else if (player.score >= 20) {
+        player.level = 2;
+    }
+};
 
 
 // generate math problem
@@ -48,9 +53,9 @@ const generateProblem = () => {
             sign = '-';
         }
     }
-
-    let one = randomNumberGen();
-    let two = randomNumberGen();
+    // generate numbers used in problem
+    let one = testLevels[player.level][0]();
+    let two = testLevels[player.level][1]();
     
     // larger number on top
     if (one > two) {
@@ -75,6 +80,7 @@ const checkAnswer = (sign) => {
         realAnswer = one - two;
     }
     
+    // event listener for answer button
     document.querySelector('#answer-form').onsubmit = (e) => {
         e.preventDefault();
         const userAnswerInput = document.querySelector('#answer');
@@ -82,11 +88,13 @@ const checkAnswer = (sign) => {
         if (realAnswer === userAnswer) {
             alert('Correct');
             player.score += 1;
+            checkScore();
             generateProblem();
             userAnswerInput.value = '';
         } else {
             alert('Try again');
             player.score -= 1;
+            checkScore();
             userAnswerInput.value = '';
         }
     };
