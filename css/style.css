@@ -55,7 +55,7 @@
 /* #login-screen {
 } */
 #menu-screen {
-    display: none;
+    display: block;
 }
 
 #flash-card {

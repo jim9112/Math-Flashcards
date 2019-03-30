@@ -10,6 +10,7 @@ const menuScreen = document.querySelector('#menu-screen');
 const flashCard = document.querySelector('#flash-card');
 const problemNumbers = document.querySelectorAll('.problem-numbers');
 const exitButton = document.querySelector('#exit');
+const scoreDisplay = document.querySelector('#score-display');
 
 const player = {
     playerName: '',
@@ -18,8 +19,8 @@ const player = {
     gameMode: '',
 };
 
-// possible new levels option
-const testLevels = [
+// levels option
+const levels = [
     [() => Math.floor(Math.random() * 11), () => Math.floor(Math.random() * 10)],
     [() => Math.floor(Math.random() * 5) + 10,() => Math.floor(Math.random() * 10)],
     [() => Math.floor(Math.random() * 10) + 10,() => Math.floor(Math.random() * 10)]
@@ -40,6 +41,7 @@ const checkScore = () => {
 
 // generate math problem
 const generateProblem = () => {
+    scoreDisplay.textContent = player.level;
     let sign = '';
     if (player.gameMode === 'addition') {
         sign = '+';
@@ -54,8 +56,8 @@ const generateProblem = () => {
         }
     }
     // generate numbers used in problem
-    let one = testLevels[player.level][0]();
-    let two = testLevels[player.level][1]();
+    let one = levels[player.level][0]();
+    let two = levels[player.level][1]();
     
     // larger number on top
     if (one > two) {
@@ -101,20 +103,21 @@ const checkAnswer = (sign) => {
 };
 
 // sign in menu
-document.querySelector('#name-form').onsubmit = (e) => {
-    e.preventDefault();
-    player.playerName = document.querySelector('#name-input').value;
-    document.querySelector('#welcome-banner').textContent = `Welcome ${player.playerName}`;
-    exitButton.style.display = 'block';
-    loginScreen.style.display = 'none';
-    menuScreen.style.display = 'block';
-};
+// document.querySelector('#name-form').onsubmit = (e) => {
+//     e.preventDefault();
+//     player.playerName = document.querySelector('#name-input').value;
+//     document.querySelector('#welcome-banner').textContent = `Welcome ${player.playerName}`;
+//     exitButton.style.display = 'block';
+//     loginScreen.style.display = 'none';
+//     menuScreen.style.display = 'block';
+// };
 
 // event listener for math selection
 document.querySelector('#math-selection').onsubmit = (e) => {
     e.preventDefault();
     menuScreen.style.display = 'none';
     flashCard.style.display = 'block';
+    scoreDisplay.textContent = player.level;
     if (document.querySelector('#addition').checked) {
         player.gameMode = 'addition';
         generateProblem();
@@ -125,15 +128,16 @@ document.querySelector('#math-selection').onsubmit = (e) => {
         player.gameMode = 'mixed';
         generateProblem();
     }
+    exitButton.style.display = 'block';
 };
 
 // exit button
 exitButton.onclick = () => {
     player.playerName = '';
     player.score = 0;
-    document.querySelector('#name-input').value = '';
-    loginScreen.style.display = 'block';
-    menuScreen.style.display = 'none';
+    // document.querySelector('#name-input').value = '';
+    // loginScreen.style.display = 'block';
+    menuScreen.style.display = 'block';
     flashCard.style.display = 'none';
     exitButton.style.display = 'none';
 };
