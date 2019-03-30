@@ -135,6 +135,8 @@ document.querySelector('#math-selection').onsubmit = (e) => {
 exitButton.onclick = () => {
     player.playerName = '';
     player.score = 0;
+    player.level = 0;
+    scoreDisplay.textContent = player.level;
     // document.querySelector('#name-input').value = '';
     // loginScreen.style.display = 'block';
     menuScreen.style.display = 'block';
