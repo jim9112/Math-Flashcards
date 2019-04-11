@@ -1,9 +1,7 @@
 // To Do
 // move variables out of global
-// logic for selection menu
 // scoring system
-// mixed mode (addition and subtraction together)
-// make name always start with a capitol letter
+// get rid of popups
 
 const loginScreen = document.querySelector('#login-screen');
 const menuScreen = document.querySelector('#menu-screen');
@@ -11,6 +9,8 @@ const flashCard = document.querySelector('#flash-card');
 const problemNumbers = document.querySelectorAll('.problem-numbers');
 const exitButton = document.querySelector('#exit');
 const scoreDisplay = document.querySelector('#score-display');
+
+let realAnswer;
 
 const player = {
     playerName: '',
@@ -27,7 +27,6 @@ const levels = [
 ];
 
 // add a min and a max to the problem generation based on the current level
-
 const checkScore = () => {
     if (player.score < 10) {
         player.level = 0;
@@ -38,16 +37,38 @@ const checkScore = () => {
     }
 };
 
+// ******************************************* Change card Background and colors ***************************************
+// wrong answer
+const wrongAnswer = () => {
+    flashCard.style.backgroundColor = "red";
+    document.querySelector('#answer-button').innerHTML = 'Incorrect <br> Try Again';
+};
 
-// generate math problem
+// Correct answer
+const correctAnswer = () => {
+    flashCard.style.backgroundColor = "green";
+    document.querySelector('#answer-button').innerHTML = 'Correct <br> Next Question';
+};
+
+// reset background color and button text
+const cardReset = () => {
+    flashCard.style.backgroundColor = "white";
+    document.querySelector('#answer-button').innerHTML = 'Check <br> Answer';
+};
+
+// ******************************************* Generate Math Problems **************************************************
 const generateProblem = () => {
+    // update player level
     scoreDisplay.textContent = player.level;
+    cardReset();
+    // adjust sign used in math problem
     let sign = '';
     if (player.gameMode === 'addition') {
         sign = '+';
     } else if (player.gameMode === 'subtraction') {
         sign = '-';
     } else if (player.gameMode === 'mixed') {
+        // randomize addition and subtraction on mixed
         let temp = Math.floor(Math.random() * 2) + 1;
         if (temp === 1) {
             sign ='+';
@@ -75,42 +96,38 @@ const generateProblem = () => {
 const checkAnswer = (sign) => {
     var one = parseInt(problemNumbers[0].textContent);
     var two = parseInt(problemNumbers[1].textContent);
-    var realAnswer;
+    
     if (sign === '+') {
         realAnswer = one + two;
     } else if (sign === '-') {
         realAnswer = one - two;
     }
+};
+
+// ******************************************* Event Listeners for Buttons ***************************************** ***
+
+// answer button submit
+document.querySelector('#answer-form').onsubmit = (e) => {
+    e.preventDefault();
+    const userAnswerInput = document.querySelector('#answer');
+    const userAnswer = parseInt(userAnswerInput.value);
     
-    // event listener for answer button
-    document.querySelector('#answer-form').onsubmit = (e) => {
-        e.preventDefault();
-        const userAnswerInput = document.querySelector('#answer');
-        const userAnswer = parseInt(userAnswerInput.value);
+    if(flashCard.style.backgroundColor === "green") {
+        generateProblem();
+        userAnswerInput.value = '';
+    } else {
         if (realAnswer === userAnswer) {
-            alert('Correct');
+            correctAnswer();
             player.score += 1;
             checkScore();
-            generateProblem();
-            userAnswerInput.value = '';
         } else {
-            alert('Try again');
+            wrongAnswer();
             player.score -= 1;
             checkScore();
             userAnswerInput.value = '';
-        }
-    };
+        } 
+    }
 };
-
-// sign in menu
-// document.querySelector('#name-form').onsubmit = (e) => {
-//     e.preventDefault();
-//     player.playerName = document.querySelector('#name-input').value;
-//     document.querySelector('#welcome-banner').textContent = `Welcome ${player.playerName}`;
-//     exitButton.style.display = 'block';
-//     loginScreen.style.display = 'none';
-//     menuScreen.style.display = 'block';
-// };
 
 // event listener for math selection
 document.querySelector('#math-selection').onsubmit = (e) => {
@@ -137,8 +154,6 @@ exitButton.onclick = () => {
     player.score = 0;
     player.level = 0;
     scoreDisplay.textContent = player.level;
-    // document.querySelector('#name-input').value = '';
-    // loginScreen.style.display = 'block';
     menuScreen.style.display = 'block';
     flashCard.style.display = 'none';
     exitButton.style.display = 'none';
