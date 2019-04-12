@@ -1,15 +1,18 @@
 // To Do
 // move variables out of global
 // scoring system
-// get rid of popups
+
 
 const loginScreen = document.querySelector('#login-screen');
 const menuScreen = document.querySelector('#menu-screen');
 const flashCard = document.querySelector('#flash-card');
 const problemNumbers = document.querySelectorAll('.problem-numbers');
 const exitButton = document.querySelector('#exit');
+const levelDisplay = document.querySelector('#level-display');
 const scoreDisplay = document.querySelector('#score-display');
 
+
+// ******************************************* Variables Used for levels and game data *********************************
 let realAnswer;
 
 const player = {
@@ -55,11 +58,17 @@ const cardReset = () => {
     flashCard.style.backgroundColor = "white";
     document.querySelector('#answer-button').innerHTML = 'Check <br> Answer';
 };
+// change level and score display
+const changeScore = () => {
+    levelDisplay.textContent = player.level;
+    scoreDisplay.textContent = player.score;
+};
+
 
 // ******************************************* Generate Math Problems **************************************************
 const generateProblem = () => {
     // update player level
-    scoreDisplay.textContent = player.level;
+    changeScore();
     cardReset();
     // adjust sign used in math problem
     let sign = '';
@@ -104,7 +113,7 @@ const checkAnswer = (sign) => {
     }
 };
 
-// ******************************************* Event Listeners for Buttons ***************************************** ***
+// ******************************************* Event Listeners for Buttons *********************************************
 
 // answer button submit
 document.querySelector('#answer-form').onsubmit = (e) => {
@@ -119,10 +128,12 @@ document.querySelector('#answer-form').onsubmit = (e) => {
         if (realAnswer === userAnswer) {
             correctAnswer();
             player.score += 1;
+            changeScore();
             checkScore();
         } else {
             wrongAnswer();
             player.score -= 1;
+            changeScore();
             checkScore();
             userAnswerInput.value = '';
         } 
@@ -134,7 +145,7 @@ document.querySelector('#math-selection').onsubmit = (e) => {
     e.preventDefault();
     menuScreen.style.display = 'none';
     flashCard.style.display = 'block';
-    scoreDisplay.textContent = player.level;
+    changeScore();
     if (document.querySelector('#addition').checked) {
         player.gameMode = 'addition';
         generateProblem();
