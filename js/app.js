@@ -164,7 +164,7 @@ exitButton.onclick = () => {
     player.playerName = '';
     player.score = 0;
     player.level = 0;
-    scoreDisplay.textContent = player.level;
+    changeScore();
     menuScreen.style.display = 'block';
     flashCard.style.display = 'none';
     exitButton.style.display = 'none';
